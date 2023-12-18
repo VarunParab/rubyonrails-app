@@ -1,0 +1,20 @@
+version: '1'
+
+services:
+  web-app:
+    build: .
+    image: railsapp:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/my_rails_app_development
+      RAILS_ENV: development
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: my_rails_app_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
